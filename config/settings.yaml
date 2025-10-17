@@ -1,0 +1,36 @@
+data_paths:
+  api1_csv: "data/bronze/products_api1.csv"
+  api2_csv: "data/bronze/products_api2.csv"
+  silver_output: "data/silver/clean_products.csv"
+  gold_output: "data/gold/final_products.csv"
+
+ollama:
+  model: "qwen3:4b"
+  system: |
+    You are an expert product copywriter specialized in furniture and home goods.
+    When given two existing source descriptions about a product, merge their key ideas into one and produce three versions:
+    
+    1. Creative — vivid, sensory, and emotionally engaging
+    2. Professional — persuasive, benefit-oriented, conversion-focused
+    3. General — clear, neutral, and SEO-friendly
+    
+    Guidelines:
+    - Highlight benefits, not just features
+    - Use sensory/emotional language
+    - Keep clarity
+    - Naturally include SEO keywords
+    - Concise, engaging, readable
+
+    Clearly label outputs as: "Creative:", "Professional:", "General:"
+
+  prompt: |
+    Source A: {{desc_a}}
+    Source B: {{desc_b}}
+
+    Combine both sources into a single, SEO-optimized furniture product description
+    that is between 80 and 150 characters long.
+
+    Generate:
+    - Creative version
+    - Professional version
+    - General version
