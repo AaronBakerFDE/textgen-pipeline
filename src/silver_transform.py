@@ -19,22 +19,21 @@ def silver_transform(df: pd.DataFrame) -> pd.DataFrame:
     """
     Transforms Bronze data into Silver layer:
     - Cleans text
-    - Combines description_a and description_b into a single description column
     - Deduplicates products by name + description
     """
     # --- Step 1: Ensure columns exist ---
-    for col in ["name", "description_a", "description_b"]:
+    for col in ["sku_id", "afi_product_description", "via_product_description"]:
         if col not in df.columns:
             df[col] = ""
 
     # Fill missing descriptions with empty string
-    df["description_a"] = df["description_a"].fillna("")
-    df["description_b"] = df["description_b"].fillna("")
+    df["afi_product_description"] = df["afi_product_description"].fillna("")
+    df["via_product_description"] = df["via_product_description"].fillna("")
 
     # --- Step 2: Clean text ---
-    df["name"] = df["name"].apply(clean_text)
-    df["description_a"] = df["description_a"].apply(clean_text)
-    df["description_b"] = df["description_b"].apply(clean_text)
+    df["sku_id"] = df["sku_id"].apply(clean_text)
+    df["afi_product_description"] = df["afi_product_description"].apply(clean_text)
+    df["via_product_description"] = df["via_product_description"].apply(clean_text)
 
     return df
 

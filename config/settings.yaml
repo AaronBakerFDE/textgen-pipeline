@@ -1,6 +1,6 @@
 data_paths:
-  api1_csv: "data/bronze/products_api1.csv"
-  api2_csv: "data/bronze/products_api2.csv"
+  via_csv: "data/bronze/vProductHierarchy.csv"
+  afi_csv: "data/bronze/api_entities.csv"
   silver_output: "data/silver/clean_products.csv"
   gold_output: "data/gold/final_products.csv"
 
@@ -24,8 +24,8 @@ ollama:
     Clearly label outputs as: "Creative:", "Professional:", "General:"
 
   prompt: |
-    Source A: {{desc_a}}
-    Source B: {{desc_b}}
+    Source A: {{afi_product_description}}
+    Source B: {{via_product_description}}
 
     Combine both sources into a single, SEO-optimized furniture product description
     that is between 80 and 150 characters long.

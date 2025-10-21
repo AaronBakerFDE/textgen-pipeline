@@ -5,15 +5,15 @@ from src.utils import generate_description_ollama
 tqdm.pandas()
 
 def gold_enrich(df: pd.DataFrame, model: str, system_prompt: str, prompt_template: str) -> pd.DataFrame:
-    for col in ["description_a", "description_b"]:
+    for col in ["afi_product_description", "via_product_description"]:
         if col not in df.columns:
             df[col] = ""
-    df["description_a"] = df["description_a"].fillna("")
-    df["description_b"] = df["description_b"].fillna("")
+    df["afi_product_description"] = df["afi_product_description"].fillna("")
+    df["via_product_description"] = df["via_product_description"].fillna("")
 
     def generate_versions(row):
-        desc_a = row["description_a"]
-        desc_b = row["description_b"]
+        desc_a = row["afi_product_description"]
+        desc_b = row["via_product_description"]
 
         result_text = generate_description_ollama(
             desc_a=desc_a,

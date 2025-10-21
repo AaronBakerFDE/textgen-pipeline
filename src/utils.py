@@ -22,6 +22,3 @@ def generate_description_ollama(desc_a: str, desc_b: str, model: str, system_pro
         ]
     )
     return response["message"]["content"].strip()
-# --- Load CSV utility ---
-def load_csv(path: str) -> pd.DataFrame:
-    return pd.read_csv(path)
