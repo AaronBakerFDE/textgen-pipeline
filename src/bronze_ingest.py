@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def bronze_ingest(via_path: str, afi_path: str) -> pd.DataFrame:
     df1 = pd.read_csv(via_path, encoding='latin1')
     df1 = df1[["ProductID","WebBenefits","PurchaseStatusCodeID"]]
