@@ -1,0 +1,30 @@
+data_paths:
+  afi_csv: "data/bronze/api_entities.csv"
+  storis_csv: "data/bronze/storis_product.csv"
+  silver_output: "data/silver/clean_products.csv"
+  gold_output: "data/gold/final_products.csv"
+
+ollama:
+  model: "qwen3:4b"
+  system: |
+    You are an expert AI and ML engineer specializing in product description generation for e-commerce.
+    Create three variations of the given product description — Creative, Professional, and General.
+    Maintain factual accuracy, correct tone, and clarity.
+
+  prompt: |
+    Use the following product data to generate improved product descriptions.
+
+    - Item Name: {item_name}
+    - Series Name: {item_series_name}
+    - Color: {color}
+    - Consumer Assembly: {consumer_assembly}
+    - Detailed Description: {detailed_description}
+    - Friendly Description: {friendly_description}
+    - Item Code: {item_code}
+    - General Description: {item_general_description}
+    - SEO Features and Keywords: {seo_features_and_keywords}
+    - Homestore Product Line: {homestore_product_line}
+    - Import/Domestic: {import_domestic}
+
+    Please return valid JSON with keys:
+    "creative_version", "professional_version", and "general_version".

@@ -22,18 +22,14 @@ def silver_transform(df: pd.DataFrame) -> pd.DataFrame:
     - Deduplicates products by name + description
     """
     # --- Step 1: Ensure columns exist ---
-    for col in ["sku_id", "afi_product_description", "via_product_description"]:
-        if col not in df.columns:
-            df[col] = ""
 
-    # Fill missing descriptions with empty string
-    df["afi_product_description"] = df["afi_product_description"].fillna("")
-    df["via_product_description"] = df["via_product_description"].fillna("")
+    # Fill missing descriptions with No Info Available
+    df = df.fillna("No Info Available")
 
     # --- Step 2: Clean text ---
-    df["sku_id"] = df["sku_id"].apply(clean_text)
-    df["afi_product_description"] = df["afi_product_description"].apply(clean_text)
-    df["via_product_description"] = df["via_product_description"].apply(clean_text)
+    df["item_code"] = df["item_code"].apply(clean_text)
+    df["friendly_description"] = df["friendly_description"].apply(clean_text)
+    df["detailed_description"] = df["detailed_description"].apply(clean_text)
 
     return df
 
